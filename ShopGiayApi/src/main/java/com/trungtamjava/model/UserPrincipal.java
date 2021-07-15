@@ -6,12 +6,14 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class UserPrincipal extends User implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
 	private Long id;
 	private String name;
 	private List<String> roles;

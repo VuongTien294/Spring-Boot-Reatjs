@@ -133,11 +133,17 @@ public class UserServiceImpl implements UserService,UserDetailsService {
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException,NullPointerException {
 		User user = userDao.getByUsername(username.trim());
+		
+		System.out.println("User Id :"+ user.getId());
+		System.out.println("User Name :"+user.getName());
+		System.out.println("UserName :"+user.getUsername());
+		
 		if (user == null) {
 			throw new UsernameNotFoundException("Username,Password not found");
 		}
+		
 		List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
 
 		for (String role : user.getRoles()) {
@@ -150,6 +156,8 @@ public class UserServiceImpl implements UserService,UserDetailsService {
 		userPrincipal.setName(user.getName());
 		userPrincipal.setEmail(user.getEmail());
 		userPrincipal.setRoles(user.getRoles());
+		System.out.println("////UserPrinciable Id :"+userPrincipal.getId());
+		
 		return userPrincipal;
 		
 	}

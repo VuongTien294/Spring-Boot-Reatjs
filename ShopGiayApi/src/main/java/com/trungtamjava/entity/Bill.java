@@ -39,8 +39,8 @@ public class Bill extends CreateAuditable implements Serializable {
 	@Column(name = "price_total")
     public double priceTotal;
 	
-//	@Column(name = "discount_percent")
-//	private Integer discountPercent;
+	@Column(name = "discount_percent")
+	private Integer discountPercent;
 	
 //	@OneToMany(cascade = CascadeType.ALL, mappedBy = "bill")
 //	@Column(name = "bill_Products")
@@ -52,6 +52,6 @@ public class Bill extends CreateAuditable implements Serializable {
 	@OneToMany(mappedBy = "bill", fetch = FetchType.LAZY)
 	private Set<BillProduct> listbillproduct = new HashSet<BillProduct>();
 	
-//    @Column(name = "couponsName")
-//    public String couponsName;
+    @Column(name = "couponsName")
+    public String couponsName;
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.trungtamjava.exception.JwtCustomException;
 import com.trungtamjava.model.ResponseDTO;
 import com.trungtamjava.model.SearchUserDTO;
@@ -25,7 +27,7 @@ import com.trungtamjava.model.UserDTO;
 import com.trungtamjava.security.JwtTokenProvider;
 import com.trungtamjava.service.UserService;
 import com.trungtamjava.ultil.RoleEnum;
-
+import com.trungtamjava.model.UserPrincipal;
 
 @RestController
 @Transactional
@@ -34,14 +36,14 @@ import com.trungtamjava.ultil.RoleEnum;
 public class RestUser {
 
 	@Autowired
-	UserService userService;
-	
+	 private UserService userService;
+
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
-	
+
 	@PostMapping("/login")
 	public TokenDTO login(@RequestParam(required = true, name = "username") String username,
 			@RequestParam(required = true, name = "password") String password,
@@ -53,16 +55,53 @@ public class RestUser {
 			throw new JwtCustomException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
 		}
 	}
+
+//	@GetMapping(value = "/member/me")
+//	private UserDTO me() {
+//		UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication()
+//				.getPrincipal();
+//		System.out.println("//////////////Nguoi dung hien tai:" + currentUser.getName());
+//		System.out.println("//////////////Nguoi dung hien tai:" + currentUser.getId());
+//		UserDTO userDTO = userService.getUserById(currentUser.getId());
+//		if(userDTO != null) {
+//			System.out.println("User DTO  ID:"+ userDTO.getId());
+//			System.out.println("User DTO  NAME:"+ userDTO.getName());
+//			
+//		}else {
+//			System.out.println("//////Co loi xay ra o Rest");
+//			
+//		}
+//		return userDTO;
+//
+//	}
 	
+	@GetMapping(value = "/member/me")
+	private UserPrincipal me() {
+		UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+		System.out.println("//////////////Nguoi dung hien tai:" + currentUser.getName());
+		System.out.println("//////////////Nguoi dung hien tai:" + currentUser.getId());
+		return currentUser;
+
+	}
+	
+//	@GetMapping(value = "/member/me")
+//	private UserPrincipal me() {
+//		UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication()
+//				.getPrincipal();
+//		return userService.getUserById(currentUser.getId());
+//
+//	}
+
 	@PostMapping(value = "/admin/user/search")
-	public ResponseDTO<UserDTO> find(@RequestBody SearchUserDTO searchUserDTO){
+	public ResponseDTO<UserDTO> find(@RequestBody SearchUserDTO searchUserDTO) {
 		ResponseDTO<UserDTO> responseDTO = new ResponseDTO<UserDTO>();
 		responseDTO.setData(userService.find(searchUserDTO));
 		responseDTO.setRecordsFiltered(searchUserDTO.getStart());
 		responseDTO.setRecordsTotal(searchUserDTO.getLength());
 		return responseDTO;
 	}
-	
+
 	@PostMapping("/user/register")
 	public UserDTO register(@RequestBody UserDTO userDTO) {
 		userDTO.setEnabled(true);

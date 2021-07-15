@@ -37,9 +37,7 @@ import com.trungtamjava.ultil.RoleEnum;
 
 @SpringBootApplication
 @EnableWebSecurity
-@EnableJpaRepositories
-@EnableJpaAuditing(auditorAwareRef = "auditorAware")
-public class ShopGiayApiApplication extends WebSecurityConfigurerAdapter  {
+public class ShopGiayApiApplication   {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ShopGiayApiApplication.class, args);
@@ -71,7 +69,6 @@ public class ShopGiayApiApplication extends WebSecurityConfigurerAdapter  {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.cors().and().csrf().disable();
-//			http.csrf().disable();
 
 			// No session will be created or used by spring security
 			http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
@@ -107,11 +104,7 @@ public class ShopGiayApiApplication extends WebSecurityConfigurerAdapter  {
 	public SessionRegistry sessionRegistry() {
 		return new SessionRegistryImpl();
 	}
-	
-//	public void addInterceptors(InterceptorRegistry registry) {
-//		registry.addInterceptor(LocaleChangeInterceptor());
-//	}
-     
+	    
 	
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {

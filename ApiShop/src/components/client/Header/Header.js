@@ -12,8 +12,24 @@ import '../css/ion.rangeSlider.css'
 import '../css/ion.rangeSlider.skinFlat.css'
 import '../css/magnific-popup.css'
 import { Link } from 'react-router-dom'
+import { Route , withRouter} from 'react-router-dom';
 
-export default class Header extends React.Component {
+ class Header extends React.Component {
+
+    logout =()=>{
+        if(localStorage.getItem("accessToken")!= null){
+            localStorage.removeItem("user")
+            localStorage.removeItem("accessToken")
+            localStorage.removeItem("billId")
+            alert("Dang Xuat Thanh Cong!")
+            this.props.history.push("/")
+        }else{
+            alert("Ban chua dang nhap!")
+            this.props.history.replace("/login")
+
+        }
+
+    }
     render() {
         return <>
             <header className="header_area sticky-header">
@@ -34,11 +50,15 @@ export default class Header extends React.Component {
                                 <ul className="nav navbar-nav menu_nav ml-auto">
                                     <li className="nav-item active"><Link className="nav-link" to="/">Home</Link></li>
                                     <li className="nav-item active"><Link className="nav-link" to="/product/search">Shop</Link></li>
-                                    {/* <li className="nav-item active"><a className="nav-link" href="index.html">Blog</a></li>
-                                    <li className="nav-item active"><a className="nav-link" href="contact.html">Contact</a></li> */}
+                                    <li className="nav-item active"><Link className="nav-link" to="/contact">Contact</Link></li>
+                                    <li className="nav-item active"><Link className="nav-link" to="/blog">Blog</Link></li>
                                 </ul>
                                 <ul className="nav navbar-nav navbar-right">
-                                    <li className="nav-item"><a href="#" className="cart"><span className="ti-bag"></span></a></li>
+                                    <li className="nav-item"><Link to="/cart" className="cart"><span className="ti-bag"></span></Link></li>
+                                </ul>
+                                <ul className="nav navbar-nav navbar-right">
+                                    <li className="nav-item"><Link to="/login" className="nav-link" >Login</Link></li>
+                                    <li className="nav-item"><Link onClick={this.logout} className="nav-link">Logout</Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -49,3 +69,5 @@ export default class Header extends React.Component {
         </>
     }
 }
+
+export default withRouter(Header)

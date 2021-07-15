@@ -23,9 +23,9 @@ public class BillDTO implements Serializable{
 	
     public double priceTotal;
     
-//    public Integer discountPercent;
+    public Integer discountPercent;
     
     public String pay;
     
-//    public String couponsName;
+    public String couponsName;
 }

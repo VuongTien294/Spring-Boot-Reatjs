@@ -38,6 +38,8 @@ public class BillServiceImpl implements BillService {
 		bill.setPay(billDTO.getPay());
 		bill.setPriceTotal(billDTO.getPriceTotal());
 		bill.setStatus(billDTO.getStatus());
+		bill.setCouponsName(billDTO.getCouponsName());
+		bill.setDiscountPercent(billDTO.getDiscountPercent());
 
 		billDao.add(bill);
 		
@@ -52,6 +54,8 @@ public class BillServiceImpl implements BillService {
 			bill.setPay(billDTO.getPay());
 			bill.setPriceTotal(billDTO.getPriceTotal());
 			bill.setStatus(billDTO.getStatus());
+			bill.setCouponsName(billDTO.getCouponsName());
+			bill.setDiscountPercent(billDTO.getDiscountPercent());
 
 			billDao.update(bill);
 		}
@@ -99,6 +103,8 @@ public class BillServiceImpl implements BillService {
 		if(bill.getBuyer()!= null) {
 			billDTO.setBuyerId(bill.getBuyer().getId());
 		}
+		billDTO.setCouponsName(bill.getCouponsName());
+		billDTO.setDiscountPercent(bill.getDiscountPercent());
 		
 		billDTO.setPriceTotal(bill.getPriceTotal());
 		billDTO.setPay(bill.getPay());

@@ -15,16 +15,16 @@ import Index from "layouts/Index";
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-    
+
       <Route path="/admin" render={() => {
         return localStorage.getItem("accessToken") ? <Admin /> : <Redirect to="/auth" />
       }}>
 
-      </Route>  
-      
-      <Route exact path="/" render={()=>{ return <Index/>}} />
+      </Route>
 
-      <Route  path="/auth" render={()=>{return <Auth/>}} />
+      <Route path="/auth" render={() => { return <Auth /> }} />
+
+      <Route path="/" render={() => { return <Index /> }} />
 
       {/* <Redirect from="*" to="/" /> */}
     </Switch>

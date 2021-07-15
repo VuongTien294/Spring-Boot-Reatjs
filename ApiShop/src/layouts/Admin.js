@@ -44,29 +44,29 @@ export default function Admin() {
         <HeaderStats />
         <div className="px-4 md:px-10 mx-auto w-full -m-24">
           <Switch>
-            <Route path="/admin/dashboard" exact component={Dashboard} />
-            <Route path="/admin/category/add" exact component={AddCategory} />
-            <Route path="/admin/category/search" exact component={SearchCategory} />
-            <Route path="/admin/category/update/:id" exact component={UpdateCategory} />
-            <Route path="/admin/category/view/:id" exact component={ViewCategory} />
+            <Route path="/admin/dashboard"  component={Dashboard} />
+            <Route path="/admin/category/add"  component={AddCategory} />
+            <Route path="/admin/category/search"  component={SearchCategory} />
+            <Route path="/admin/category/update/:id"  component={UpdateCategory} />
+            <Route path="/admin/category/view/:id"  component={ViewCategory} />
 
-            <Route path="/admin/product/add" exact component={AddProduct} />
-            <Route path="/admin/product/search" exact component={SearchProduct} />
-            <Route path="/admin/product/update/:id" exact component={UpdateProduct} />
-            <Route path="/admin/product/view/:id" exact component={ViewProduct} />
+            <Route path="/admin/product/add"  component={AddProduct} />
+            <Route path="/admin/product/search"  component={SearchProduct} />
+            <Route path="/admin/product/update/:id"  component={UpdateProduct} />
+            <Route path="/admin/product/view/:id"  component={ViewProduct} />
 
-            <Route path="/admin/user/add" exact component={AddUser} />
-            <Route path="/admin/user/search" exact component={SearchUser} />
-            <Route path="/admin/user/update/:id" exact component={UpdateUser} />
+            <Route path="/admin/user/add"  component={AddUser} />
+            <Route path="/admin/user/search"  component={SearchUser} />
+            <Route path="/admin/user/update/:id"  component={UpdateUser} />
 
-            <Route path="/admin/bill/search" exact component={SearchBill} />
-            <Route path="/admin/bill/view/:id" exact component={ViewBill} />
+            <Route path="/admin/bill/search"  component={SearchBill} />
+            <Route path="/admin/bill/view/:id"  component={ViewBill} />
 
-            <Route path="/admin/coupon/add" exact component={AddCoupon} />
-            <Route path="/admin/coupon/search" exact component={SearchCoupon} />
-            <Route path="/admin/coupon/update/:id" exact component={UpdateCoupon} />
+            <Route path="/admin/coupon/add"  component={AddCoupon} />
+            <Route path="/admin/coupon/search"  component={SearchCoupon} />
+            <Route path="/admin/coupon/update/:id"  component={UpdateCoupon} />
 
-            <Route path="/admin/comment/search" exact component={SearchComment} />
+            <Route path="/admin/comment/search"  component={SearchComment} />
 
             <Redirect from="/admin" to="/admin/dashboard" />
           </Switch>

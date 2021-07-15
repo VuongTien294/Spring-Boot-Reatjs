@@ -10,9 +10,7 @@ export default class CardAddCoupon extends React.Component {
             code: "",
             persent: "",
             expiredDate: ""
-
         }
-
     }
 
     addCoupon = async () => {

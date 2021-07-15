@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router";
-// import { useHistory } from "react-router";
+
 
 // components
 
@@ -8,10 +8,8 @@ import { withRouter } from "react-router";
     constructor(props) {
         super(props)
 
-        
         let { match } = this.props
         let { id } = match.params
-
 
         this.state = {
             id:id,
@@ -96,6 +94,7 @@ import { withRouter } from "react-router";
                 alert("Thanh cong!")
                 let {history} = this.props
                 history.goBack()
+                console.log(this.state)
             }
         } catch (error) {
             console.log(this.state)

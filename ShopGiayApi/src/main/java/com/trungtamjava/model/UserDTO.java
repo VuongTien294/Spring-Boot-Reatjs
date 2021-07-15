@@ -8,8 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class UserDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -28,4 +27,13 @@ public class UserDTO implements Serializable {
 	private String email;
 	
 	private String createdDate;
+	
+	public UserDTO() {
+		super();
+	}
+
+	public UserDTO(Long id) {
+		super();
+		this.id = id;
+	}
 }
